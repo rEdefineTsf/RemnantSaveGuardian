@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using System.IO.Compression;
 using System.Runtime.InteropServices;
+using System.Windows.Shapes;
+using System.Linq;
 
 namespace RemnantSaveGuardian
 {
@@ -132,21 +134,34 @@ namespace RemnantSaveGuardian
         public static string DefaultSaveFolder()
         {
             var saveFolder = SHGetKnownFolderPath(FOLDERID_SavedGames, 0) + @"\Remnant2";
-            if (Directory.Exists($@"{saveFolder}\Steam"))
+            if (Directory.Exists($@"{DefaultWgsSaveFolder}"))
             {
-                saveFolder += @"\Steam";
-                var userFolders = Directory.GetDirectories(saveFolder);
-                if (userFolders.Length > 0)
+                foreach (var file in Directory.GetFiles(DefaultWgsSaveFolder))
                 {
-                    return userFolders[0];
+                    if (!File.Exists(file) && Directory.EnumerateDirectories(file).Any() || Directory.EnumerateFiles(file).Any())
+                    {
+                        return file;
+                    }
                 }
             }
             else
             {
-                var folders = Directory.GetDirectories(saveFolder);
-                if (folders.Length > 0)
+                if (Directory.Exists($@"{saveFolder}\Steam"))
                 {
-                    return folders[0];
+                    saveFolder += @"\Steam";
+                    var userFolders = Directory.GetDirectories(saveFolder);
+                    if (userFolders.Length > 0)
+                    {
+                        return userFolders[0];
+                    }
+                }
+                else
+                {
+                    var folders = Directory.GetDirectories(saveFolder);
+                    if (folders.Length > 0)
+                    {
+                        return folders[0];
+                    }
                 }
             }
             return saveFolder;
