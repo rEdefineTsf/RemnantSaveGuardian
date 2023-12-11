@@ -53,7 +53,7 @@ namespace RemnantSaveGuardian
                 if (x % 2 == 0)
                 {
                     var wordFolderNameBytes = new byte[16];
-                    Array.Copy(byteBuffer, offset+ wordIndex, wordFolderNameBytes, 0, 16);
+                    Array.Copy(byteBuffer, offset + wordIndex, wordFolderNameBytes, 0, 16);
                     var wordGuid = new Guid(wordFolderNameBytes);
                     var wordFolderName = wordGuid.ToString().ToUpper().Replace("-", "");
                     if (Directory.Exists($@"{folderPath}\{wordFolderName}"))
@@ -69,15 +69,24 @@ namespace RemnantSaveGuardian
             }
         }
 
-        public String GetWordPath(string containerPath) 
+        public String GetWordPath(string containerPath)
         {
             var folderPath = new FileInfo(containerPath).Directory.FullName;
             var offset = 136;
             byte[] byteBuffer = File.ReadAllBytes(containerPath);
             var profileBytes = new byte[16];
-            Array.Copy(byteBuffer, offset, profileBytes, 0, 16);
-            var profileGuid = new Guid(profileBytes);
-            return folderPath + "\\" + profileGuid.ToString().ToUpper().Replace("-", "");
+            String worldName = "";
+            for (int i = 0; i < 16; i++)
+            {
+                Array.Copy(byteBuffer, offset + i, profileBytes, 0, 16);
+                var profileGuid = new Guid(profileBytes);
+                String tempWorldName = profileGuid.ToString().ToUpper().Replace("-", "");
+                if (File.Exists($@"{folderPath}\{tempWorldName}"))
+                {
+                    worldName = tempWorldName;
+                }
+            }
+            return folderPath + "\\" + worldName;
         }
 
         public void GetProfile(string containerPath, String parent)
@@ -86,9 +95,19 @@ namespace RemnantSaveGuardian
             var offset = 136;
             byte[] byteBuffer = File.ReadAllBytes(containerPath);
             var profileBytes = new byte[16];
-            Array.Copy(byteBuffer, offset, profileBytes, 0, 16);
-            var profileGuid = new Guid(profileBytes);
-            Profile = parent + "\\" + profileGuid.ToString().ToUpper().Replace("-", "");
+            String profileName = "";
+            for (int i = 0; i < 16; i++)
+            {
+                Array.Copy(byteBuffer, offset + i, profileBytes, 0, 16);
+                var profileGuid = new Guid(profileBytes);
+                String tempProfileName = profileGuid.ToString().ToUpper().Replace("-", "");
+                if (File.Exists($@"{folderPath}\{tempProfileName}"))
+                {
+                    profileName = tempProfileName;
+                }
+            }
+
+            Profile = parent + "\\" + profileName;
             isValid = File.Exists($@"{folderPath}\{Profile}");
         }
 
