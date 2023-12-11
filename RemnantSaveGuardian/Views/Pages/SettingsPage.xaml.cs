@@ -358,5 +358,10 @@ namespace RemnantSaveGuardian.Views.Pages
                 WindowDwmHelper.ApplyDwm(mainWindow, WindowDwmHelper.UXMaterials.Mica);
             }
         }
+
+        private void chkAutoBackup_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

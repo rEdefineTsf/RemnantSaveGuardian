@@ -27,6 +27,7 @@ namespace RemnantSaveGuardian.Views.Pages
         {
             get;
         }
+        private string pathToSaveFiles;
         private RemnantSave Save;
         private List<RemnantWorldEvent> filteredCampaign;
         private List<RemnantWorldEvent> filteredAdventure;
@@ -34,7 +35,7 @@ namespace RemnantSaveGuardian.Views.Pages
         public WorldAnalyzerPage(ViewModels.WorldAnalyzerViewModel viewModel, string? pathToSaveFiles = null)
         {
             ViewModel = viewModel;
-
+            this.pathToSaveFiles = pathToSaveFiles;
             InitializeComponent();
             EventTransfer.Event += ChangeGridVisibility;
 
@@ -683,6 +684,62 @@ namespace RemnantSaveGuardian.Views.Pages
             public string PropertyName { get; private set; }
             public object OldValue { get; private set; }
             public object NewValue { get; set; }
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            InitializeComponent();
+            EventTransfer.Event += ChangeGridVisibility;
+
+            try
+            {
+                if (pathToSaveFiles == null)
+                {
+                    pathToSaveFiles = Properties.Settings.Default.SaveFolder;
+                }
+
+                Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
+
+                Save = new(pathToSaveFiles);
+                if (pathToSaveFiles == Properties.Settings.Default.SaveFolder)
+                {
+                    SaveWatcher.SaveUpdated += (sender, eventArgs) => {
+                        Dispatcher.Invoke(() =>
+                        {
+                            var selectedIndex = CharacterControl.SelectedIndex;
+                            Save.UpdateCharacters();
+                            CharacterControl.Items.Refresh();
+                            if (selectedIndex >= CharacterControl.Items.Count)
+                            {
+                                selectedIndex = 0;
+                            }
+                            CharacterControl.SelectedIndex = selectedIndex;
+                            //CharacterControl_SelectionChanged(null, null);
+                        });
+                    };
+                    Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
+                    BackupsPage.BackupSaveRestored += BackupsPage_BackupSaveRestored;
+                }
+                CharacterControl.ItemsSource = Save.Characters;
+
+                //FontSizeSlider.Value = AdventureData.FontSize;
+                //FontSizeSlider.Minimum = 2.0;
+                //FontSizeSlider.Maximum = AdventureData.FontSize * 2;
+                FontSizeSlider.Value = Properties.Settings.Default.AnalyzerFontSize;
+                FontSizeSlider.ValueChanged += FontSizeSlider_ValueChanged;
+
+                filteredCampaign = new();
+                filteredAdventure = new();
+                CampaignData.ItemsSource = filteredCampaign;
+                AdventureData.ItemsSource = filteredAdventure;
+
+                Task task = new Task(FirstLoad);
+                task.Start();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Error initializing analzyer page: {ex}");
+            }
         }
     }
 }

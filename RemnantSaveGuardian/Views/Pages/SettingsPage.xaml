@@ -38,7 +38,7 @@
                         <ui:SymbolIcon FontSize="24" Margin="0,0,8,0" VerticalAlignment="Center" Symbol="Save24" ClipToBounds="True"/>
                         <TextBlock VerticalAlignment="Center" FontSize="20" FontWeight="Medium" Text="{lex:Loc Saves}" />
                     </StackPanel>
-                    <ui:ToggleSwitch Grid.Column="2" Name="chkAutoBackup" Content="{lex:Loc}" IsChecked="{Binding AutoBackup}" FlowDirection="RightToLeft" Margin="0,0,40,0"/>
+                    <ui:ToggleSwitch Grid.Column="2" Name="chkAutoBackup" Content="{lex:Loc}" IsChecked="{Binding AutoBackup}" FlowDirection="RightToLeft" Margin="0,0,40,0" IsEnabled="False"/>
                 </Grid>
             </ui:CardExpander.Header>
             <StackPanel>

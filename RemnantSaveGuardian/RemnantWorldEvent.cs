@@ -1680,8 +1680,8 @@ namespace RemnantSaveGuardian
                     campaignIndex = 1;
                     adventureIndex = 0;
                 }
+                ProcessEvents(character, eventGroupMatches[campaignIndex], injectables, ProcessMode.Campaign);
             }
-            ProcessEvents(character, eventGroupMatches[campaignIndex], injectables, ProcessMode.Campaign);
             //Logger.Log($"{mode}");
             if (adventureIndex != -1)
             {

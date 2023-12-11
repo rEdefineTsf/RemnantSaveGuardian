@@ -166,6 +166,10 @@
             </WrapPanel>
             <WrapPanel Grid.Column="1">
                 <ui:TextBox Name="WorldAnalyzerFilter" Margin="10,0,0,0" TextWrapping="Wrap" Text="" Width="Auto" HorizontalAlignment="Left" Icon="Filter24" PlaceholderEnabled="True" PlaceholderText="{lex:Loc}" TextChanged="WorldAnalyzerFilter_TextChanged"/>
+
+                <Button Name="btnRefresh" ToolTip="{lex:Loc}" HorizontalAlignment="Center" Margin="5,0,0,0" Click="btnRefresh_Click" >
+                    <ui:SymbolIcon HorizontalAlignment="Left" Symbol="Clock32" />
+                </Button>
             </WrapPanel>
             <WrapPanel Grid.Column="2" VerticalAlignment="Center" Visibility="Visible">
                 <TextBlock FontWeight="Medium" Text="{lex:Loc Zoom}" VerticalAlignment="Center" Margin="0,0,5,0"/>

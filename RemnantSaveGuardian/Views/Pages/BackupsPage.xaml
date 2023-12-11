@@ -25,11 +25,11 @@
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0">
             <ToolBar ToolBarTray.IsLocked="True" Height="Auto" Width="Auto">
-                <Button Name="btnBackup" ToolTip="{lex:Loc}" Click="BtnBackup_Click">
-                    <ui:SymbolIcon HorizontalAlignment="Left" Symbol="Save24" />
+                <Button Name="btnBackup" ToolTip="{lex:Loc}" Click="BtnBackup_Click" IsEnabled="False">
+                    <ui:SymbolIcon HorizontalAlignment="Left" Symbol="Save24" IsEnabled="False" />
                 </Button>
-                <Button Name="btnOpenBackupsFolder" ToolTip="{lex:Loc}" Click="BtnOpenBackupsFolder_Click">
-                    <ui:SymbolIcon HorizontalAlignment="Left" Symbol="FolderOpen24" />
+                <Button Name="btnOpenBackupsFolder" ToolTip="{lex:Loc}" Click="BtnOpenBackupsFolder_Click" IsEnabled="False">
+                    <ui:SymbolIcon HorizontalAlignment="Left" Symbol="FolderOpen24" IsEnabled="False" />
                 </Button>
                 <Button Name="btnStartGame" ToolTip="{lex:Loc}" Visibility="Collapsed" Click="BtnStartGame_Click">
                     <ui:SymbolIcon HorizontalAlignment="Left" Symbol="Play24" />
