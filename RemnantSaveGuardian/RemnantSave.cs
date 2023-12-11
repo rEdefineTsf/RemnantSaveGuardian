@@ -38,7 +38,7 @@ namespace RemnantSaveGuardian
             }
             else
             {
-                var winFiles = Directory.GetFiles(path, "container.*");
+                var winFiles = Directory.GetFiles(path, "containers.*");
                 if (winFiles.Length > 0)
                 {
                     this.winSave = new WindowsSave(winFiles[0]);
@@ -109,7 +109,7 @@ namespace RemnantSaveGuardian
             }
             else
             {
-                var winFiles = Directory.GetFiles(folder, "container.*");
+                var winFiles = Directory.GetFiles(folder, "containers.*");
                 if (winFiles.Length > 0)
                 {
                     return true;

@@ -180,7 +180,7 @@ namespace RemnantSaveGuardian.Views.Pages
                 File.Copy(Save.SaveProfilePath, $@"{openFolderDialog.SelectedPath}\profile.sav", true);
                 foreach (var filePath in Save.WorldSaves)
                 {
-                    File.WriteAllText($@"{openFolderDialog.SelectedPath}\{filePath.Substring(filePath.LastIndexOf(@"\")).Replace(".sav", ".txt")}", RemnantSave.DecompressSaveAsString(filePath));
+                    File.WriteAllText($@"{openFolderDialog.SelectedPath}\{filePath.Substring(filePath.LastIndexOf(@"\"))+".txt"}", RemnantSave.DecompressSaveAsString(filePath));
                     File.Copy(filePath, $@"{openFolderDialog.SelectedPath}\{filePath.Substring(filePath.LastIndexOf(@"\"))}", true);
                 }
                 Logger.Success(Loc.T($"Exported save files successfully to {openFolderDialog.SelectedPath}"));
@@ -189,7 +189,7 @@ namespace RemnantSaveGuardian.Views.Pages
                 Logger.Error(Loc.T("Error exporting save files: {errorMessage}", new() { { "errorMessage", ex.Message } }));
             }
         }
-
+         
         private void Default_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "ShowPossibleItems" || e.PropertyName == "MissingItemColor")

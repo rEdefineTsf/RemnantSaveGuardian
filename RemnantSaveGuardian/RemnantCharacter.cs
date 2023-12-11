@@ -64,7 +64,7 @@ namespace RemnantSaveGuardian
             {
                 string profileData = remnantSave.GetProfileData();
         #if DEBUG
-                File.WriteAllText(remnantSave.SaveProfilePath.Replace(".sav", ".txt"), profileData);
+                File.WriteAllText(remnantSave.SaveProfilePath+".txt", profileData);
         #endif
                 var archetypes = Regex.Matches(profileData, @"/Game/World_(Base|DLC\d+)/Items/Archetypes/(?<archetype>\w+)/Archetype_\w+_UI\.Archetype_\w+_UI_C");
                 var inventoryStarts = Regex.Matches(profileData, "/Game/Characters/Player/Base/Character_Master_Player.Character_Master_Player_C");

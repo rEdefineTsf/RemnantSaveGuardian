@@ -1692,7 +1692,7 @@ namespace RemnantSaveGuardian
         {
             var savetext = RemnantSave.DecompressSaveAsString(character.Save.WorldSaves[character.WorldIndex]);
     #if DEBUG
-            System.IO.File.WriteAllText(character.Save.WorldSaves[character.WorldIndex].Replace(".sav", ".txt"), savetext);
+            System.IO.File.WriteAllText(character.Save.WorldSaves[character.WorldIndex]+".txt", savetext);
     #endif
             ProcessEvents(character, savetext);
         }
