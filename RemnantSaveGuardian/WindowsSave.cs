@@ -76,7 +76,7 @@ namespace RemnantSaveGuardian
             byte[] byteBuffer = File.ReadAllBytes(containerPath);
             var profileBytes = new byte[16];
             String worldName = "";
-            for (int i = offset; i < byteBuffer.Length - 16; i++)
+            for (int i = offset; i < byteBuffer.Length - 15; i++)
             {
                 Array.Copy(byteBuffer, i, profileBytes, 0, 16);
                 var profileGuid = new Guid(profileBytes);
@@ -96,7 +96,7 @@ namespace RemnantSaveGuardian
             byte[] byteBuffer = File.ReadAllBytes(containerPath);
             var profileBytes = new byte[16];
             String profileName = "";
-            for (int i = offset; i < byteBuffer.Length - 16; i++)
+            for (int i = offset; i < byteBuffer.Length - 15; i++)
             {
                 Array.Copy(byteBuffer, i, profileBytes, 0, 16);
                 var profileGuid = new Guid(profileBytes);
