@@ -2,7 +2,7 @@
 this one will stop update when the source project support Microsoft version
 current version disabled autosave function
 
-#this version might need to Run as administrator
+# this version might need to Run as administrator
 
 # Remnant Save Guardian
 Back up your Remnant 2 saves and view your world rolls.
