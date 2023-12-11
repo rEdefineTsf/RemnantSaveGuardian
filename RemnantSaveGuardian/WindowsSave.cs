@@ -76,9 +76,9 @@ namespace RemnantSaveGuardian
             byte[] byteBuffer = File.ReadAllBytes(containerPath);
             var profileBytes = new byte[16];
             String worldName = "";
-            for (int i = 0; i < 16; i++)
+            for (int i = offset; i < byteBuffer.Length - 16; i++)
             {
-                Array.Copy(byteBuffer, offset + i, profileBytes, 0, 16);
+                Array.Copy(byteBuffer, i, profileBytes, 0, 16);
                 var profileGuid = new Guid(profileBytes);
                 String tempWorldName = profileGuid.ToString().ToUpper().Replace("-", "");
                 if (File.Exists($@"{folderPath}\{tempWorldName}"))
@@ -96,9 +96,9 @@ namespace RemnantSaveGuardian
             byte[] byteBuffer = File.ReadAllBytes(containerPath);
             var profileBytes = new byte[16];
             String profileName = "";
-            for (int i = 0; i < 16; i++)
+            for (int i = offset; i < byteBuffer.Length - 16; i++)
             {
-                Array.Copy(byteBuffer, offset + i, profileBytes, 0, 16);
+                Array.Copy(byteBuffer, i, profileBytes, 0, 16);
                 var profileGuid = new Guid(profileBytes);
                 String tempProfileName = profileGuid.ToString().ToUpper().Replace("-", "");
                 if (File.Exists($@"{folderPath}\{tempProfileName}"))
