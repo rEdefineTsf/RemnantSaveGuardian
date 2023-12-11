@@ -1,5 +1,6 @@
-# A copy try to add xgp version support
-this one will stop update when the source project support xgp version
+# A copy try to add Microsoft version support
+this one will stop update when the source project support Microsoft version
+current version disabled autosave function
 
 # Remnant Save Guardian
 Back up your Remnant 2 saves and view your world rolls.
